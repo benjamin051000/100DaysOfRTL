@@ -1,11 +1,11 @@
 module day01 (
 	input logic clk, rst,
 	input logic d,
-	output logic q_norst, q_sync_rst, q_async_rst
+	output logic q_no_rst, q_sync_rst, q_async_rst
 );
 
 	always_ff @(posedge clk) begin: dff_no_rst
-		q_norst <= d;
+		q_no_rst <= d;
 	end
 
 	always_ff @(posedge clk) begin: dff_sync_rst

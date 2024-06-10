@@ -1,7 +1,7 @@
 module day01 (
 	input logic clk, rst,
 	input logic d,
-	output logic q_norst, q_sync_rst, q_async_rst
+	output logic q_no_rst, q_sync_rst, q_async_rst
 );
 
 	always_ff @(/* TODO */) begin: dff_no_rst

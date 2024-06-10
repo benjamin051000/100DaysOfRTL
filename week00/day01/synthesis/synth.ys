@@ -1,0 +1,6 @@
+read -sv day01.sv
+hierarchy -top day01
+proc; opt 
+techmap; opt
+write_verilog synth.v
+show -prefix day01 -colors 1
