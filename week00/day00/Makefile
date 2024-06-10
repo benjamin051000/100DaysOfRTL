@@ -24,5 +24,5 @@ synth: $(SRC_DIR)/$(SRC_FILES)
 	yosys synth.ys
 
 clean:
-	rm -rf $(BUILD_DIR) day00.vcd
+	rm -rf $(BUILD_DIR) day00.vcd day00.dot*
 
