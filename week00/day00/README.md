@@ -1,12 +1,15 @@
 # Day 1
-Design and verify a 2:1 mux
+Design and verify a 2-to-1 [multiplexer](https://en.wikipedia.org/wiki/Multiplexer).
 
 ## Interface Definition
 The module should have the following interface:
 
-```verilog
-input   wire [7:0]    a_i   - First leg of the mux
-input   wire [7:0]    b_i   - Second leg of the mux
-input   wire          sel_i - Mux select
-output  wire [7:0]    y_o   - Mux output
+```systemverilog
+module day00 (
+	input logic a,
+	input logic b,
+	input logic select,
+	output logic y
+);
 ```
+
