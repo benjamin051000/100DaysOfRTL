@@ -23,7 +23,7 @@ sim: $(IVERILOG_OUTFILE)
 	gtkwave $(DAY).vcd 
 
 synth: $(SRC_DIR)/$(SRC_FILES) 
-	yosys synth.ys
+	yosys synthesis/synth.ys
 
 solution:
 	# TODO do this better
@@ -31,7 +31,7 @@ solution:
 	iverilog $(IVERILOG_SOLUTION_FLAGS) -s $(DAY)_tb $(DAY)_solution.sv $(DAY)_tb.sv
 	solution/sim.vvp
 	gtkwave $(DAY).vcd &
-	yosys solution.ys &
+	yosys synthesis/solution.ys &
 
 clean:
 	rm -rf $(BUILD_DIR) solution/ day00.vcd day00.dot* synth.v
