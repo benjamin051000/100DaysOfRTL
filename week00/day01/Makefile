@@ -34,5 +34,5 @@ solution:
 	yosys synthesis/solution.ys &
 
 clean:
-	rm -rf $(BUILD_DIR) solution/ day00.vcd day00.dot* synth.v
+	rm -rf $(BUILD_DIR) solution/ day01.vcd day01.dot* synth.v
 
