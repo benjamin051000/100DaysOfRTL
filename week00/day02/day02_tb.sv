@@ -1,43 +1,35 @@
-// Simple edge detector TB
+module day02_tb;
+	logic clk = 0, rst;
+	logic a, rising_edge, falling_edge;
 
-module day02_tb ();
+	day02 dut (.*);
 
-  logic    clk;
-  logic    reset;
+	initial begin: generate_clk
+		while(1) #5 clk = ~clk;
+	end
 
-  logic    a_i;
+	// Stimulus
+	initial begin
+		rst <= 1;
+		a <= 1;
+		@(posedge clk);
 
-  logic    rising_edge_o;
-  logic    falling_edge_o;
+		rst <= 0;
+		@(posedge clk);
 
-  day02 DAY3 (.*);
+		for (int i = 0; i < 32; i++) begin
+			a <= $random % 2;
+			@(posedge clk);
+		end
 
-  // clk
-  always begin
-    clk = 1'b1;
-    #5;
-    clk = 1'b0;
-    #5;
-  end
+		disable generate_clk;
+		$finish();
+	end
 
-  // Stimulus
-  initial begin
-    reset <= 1'b1;
-    a_i <= 1'b1;
-    @(posedge clk);
-    reset <= 1'b0;
-    @(posedge clk);
-    for (int i=0; i<32; i++) begin
-      a_i <= $random%2;
-      @(posedge clk);
-    end
-    $finish();
-  end
-
-  // Dump VCD
-  initial begin
-    $dumpfile("day02.vcd");
-    $dumpvars(0, day02_tb);
-  end
+	// Dump VCD
+	initial begin
+		$dumpfile("day02.vcd");
+		$dumpvars(0, day02_tb);
+	end
 
 endmodule
