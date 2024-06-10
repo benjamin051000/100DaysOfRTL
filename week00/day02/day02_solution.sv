@@ -1,24 +1,23 @@
- // An edge detector
-
-
 module day02 (
 	input logic clk, rst,
 	input logic a,
 	output logic rising_edge, falling_edge
 );
 
-  logic a_ff;
+  logic prev_a;
 
-  always_ff @(posedge clk or posedge rst)
+  always_ff @(posedge clk or posedge rst) begin
     if (rst)
-      a_ff <= 1'b0;
+      prev_a <= 1'b0;
     else
-      a_ff <= a;
+      prev_a <= a;
+  end
 
   // Rising edge when delayed signal is 0 but current is 1
-  assign rising_edge = ~a_ff & a;
+  assign rising_edge = ~prev_a & a;
 
   // Falling edge when delayed signal is 1 but current is 0
-  assign falling_edge = a_ff & ~a;
+  assign falling_edge = prev_a & ~a;
 
 endmodule
+
