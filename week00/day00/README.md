@@ -1,4 +1,4 @@
-# Day 1
+# Day 0
 Design and verify a 2-to-1 [multiplexer](https://en.wikipedia.org/wiki/Multiplexer).
 
 ## Interface Definition
