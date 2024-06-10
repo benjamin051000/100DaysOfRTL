@@ -1,13 +1,13 @@
 // A simple TB for mux
 
-module day1_tb ();
+module day00_tb ();
 
   logic [7:0] a_i;
   logic [7:0] b_i;
   logic       sel_i;
   logic [7:0] y_o;
 
-  day1 DAY1 (.*);
+  day00 DAY1 (.*);
 
   initial begin
     for (int i = 0; i < 10; i++) begin
@@ -19,8 +19,8 @@ module day1_tb ();
   end
 
   initial begin
-    $dumpfile("day1.vcd");
-    $dumpvars(0, day1_tb);
+    $dumpfile("day00.vcd");
+    $dumpvars(0, day00_tb);
   end
 
 endmodule
