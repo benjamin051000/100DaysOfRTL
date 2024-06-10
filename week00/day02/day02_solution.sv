@@ -1,7 +1,7 @@
  // An edge detector
 
 
-module day3 (
+module day02 (
   input     wire    clk,
   input     wire    reset,
 

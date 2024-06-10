@@ -1,6 +1,6 @@
 // Simple edge detector TB
 
-module day3_tb ();
+module day02_tb ();
 
   logic    clk;
   logic    reset;
@@ -10,7 +10,7 @@ module day3_tb ();
   logic    rising_edge_o;
   logic    falling_edge_o;
 
-  day3 DAY3 (.*);
+  day02 DAY3 (.*);
 
   // clk
   always begin
@@ -36,8 +36,8 @@ module day3_tb ();
 
   // Dump VCD
   initial begin
-    $dumpfile("day3.vcd");
-    $dumpvars(0, day3_tb);
+    $dumpfile("day02.vcd");
+    $dumpvars(0, day02_tb);
   end
 
 endmodule
