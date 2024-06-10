@@ -1,26 +1,22 @@
-// A simple TB for mux
+module day00_tb;
 
-module day00_tb ();
+logic a, b, y;
+logic select;
 
-  logic [7:0] a_i;
-  logic [7:0] b_i;
-  logic       sel_i;
-  logic [7:0] y_o;
+day00 dut (.*);
 
-  day00 DAY1 (.*);
+initial begin: driver
+	repeat(30) begin
+		a = $random % 2;
+		b = $random % 2;;
+		select = $random % 2;
+		#5;
+	end
+end: driver
 
-  initial begin
-    for (int i = 0; i < 10; i++) begin
-      a_i   = $urandom_range (0, 8'hFF);
-      b_i   = $urandom_range (0, 8'hFF);
-      sel_i = $random%2;
-      #5;
-    end
-  end
-
-  initial begin
-    $dumpfile("day00.vcd");
-    $dumpvars(0, day00_tb);
-  end
+initial begin
+	$dumpfile("day00.vcd");
+	$dumpvars(0, day00_tb);
+end
 
 endmodule
