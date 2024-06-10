@@ -13,7 +13,7 @@ module day00 (
 );
 ```
 
-# Goal
+# Goals
 - [ ] run `make` and observe no compilation errors.
 - [ ] run `make sim` and observe no simulation errors.
 - [ ] run `make synth` and observe no synthesis errors.
