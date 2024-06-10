@@ -1,6 +1,4 @@
-// DFF TB
-
-module day2_tb ();
+module day01_tb;
 
   logic      clk;
   logic      reset;
@@ -11,7 +9,7 @@ module day2_tb ();
   logic      q_syncrst_o;
   logic      q_asyncrst_o;
 
-  day2 DAY2 (.*);
+  day01 dut (.*);
 
   // Generate clk
   always begin

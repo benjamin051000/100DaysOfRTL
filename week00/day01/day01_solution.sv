@@ -1,4 +1,4 @@
-module day02 (
+module day01 (
 	input logic clk, rst,
 	input logic d,
 	output logic q_norst, q_sync_rst, q_async_rst
