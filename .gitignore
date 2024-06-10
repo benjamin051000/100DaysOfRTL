@@ -1,5 +1,4 @@
 *.vvp
-synth.ys
 synth.v
 *.dot
 *.dot.pid

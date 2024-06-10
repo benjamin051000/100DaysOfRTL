@@ -5,6 +5,6 @@ module day00 (
 	output logic y
 );
 
-	// TODO your solution here
+	assign y = select ? b : a;
 
 endmodule
