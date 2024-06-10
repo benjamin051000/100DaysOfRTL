@@ -1,32 +1,26 @@
-// Different DFF
-
-module day2 (
-  input     logic      clk,
-  input     logic      reset,
-
-  input     logic      d_i,
-
-  output    logic      q_norst_o,
-  output    logic      q_syncrst_o,
-  output    logic      q_asyncrst_o
+module day02 (
+	input logic clk, rst,
+	input logic d,
+	output logic q_norst, q_sync_rst, q_async_rst
 );
 
-  // No reset
-  always_ff @(posedge clk)
-    q_norst_o <= d_i;
+	always_ff @(posedge clk) begin: dff_no_rst
+		q_norst <= d;
+	end
 
-  // Sync reset
-  always_ff @(posedge clk)
-    if (reset)
-      q_syncrst_o <= 1'b0;
-    else
-      q_syncrst_o <= d_i;
+	always_ff @(posedge clk) begin: dff_sync_rst
+		if (rst)
+			q_sync_rst <= 1'b0;
+		else
+			q_sync_rst <= d;
+	end
 
-  // Async reset
-  always_ff @(posedge clk or posedge reset)
-    if (reset)
-      q_asyncrst_o <= 1'b0;
-    else
-      q_asyncrst_o <= d_i;
+	always_ff @(posedge clk or posedge rst) begin: dff_async_rst
+		if (rst)
+			q_async_rst <= 1'b0;
+		else
+			q_async_rst <= d;
+	end
 
 endmodule
+

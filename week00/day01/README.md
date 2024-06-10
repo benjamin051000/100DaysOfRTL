@@ -1,16 +1,26 @@
-# Day 2
-Design and verify various flavours of a D flip-flop
+# Day 1
+Create a module that contains several [D flip-flops](https://en.wikipedia.org/wiki/Flip-flop_(electronics)#D_flip-flop) with the following reset logic behavior:
+- No reset
+- Syncronous reset
+- Asynchronous reset
 
 ## Interface Definition
 The module should have the following interface:
 
-```verilog
-input     logic      clk,
-input     logic      reset,
-
-input     logic      d_i,         -> D input to the flop
-
-output    logic      q_norst_o,   -> Q output from non-resettable flop
-output    logic      q_syncrst_o, -> Q output from flop using synchronous reset
-output    logic      q_asyncrst_o -> Q output from flop using asynchrnoous reset
+```systemverilog
+module day02 (
+	input logic clk, rst,
+	input logic d,
+	output logic q_norst, q_sync_rst, q_async_rst
+);
 ```
+
+# Goals
+- run `make` and observe no compilation errors.
+- run `make sim` and observe no simulation errors.
+- run `make synth` and observe no synthesis errors.
+
+> [!TIP]
+> Run `make solution` to see a simulation and synthesis output for the given 
+> solution, `day00_solution.sv`.
+
