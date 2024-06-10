@@ -1,27 +1,25 @@
-DAY  = day1
+DAY  = day00
 TIME = $$(date +'%Y%m%d-%H%M%S')
 
-TOOLCMD = iverilog -o sim.vvp -Wall -Winfloop -Wno-timescale -gno-shared-loop-index -g2012
+SRC_DIRS = .
+FILES = $(shell find $(SRC_DIRS) -name '*.sv' -or -name '*.v' )
 
-compile: clean
-	$(TOOLCMD) -s $(DAY) $(DAY).sv
+BUILD_DIR = ./build
 
-sim: clean
-	$(TOOLCMD) -s $(DAY)_tb $(DAY).sv $(DAY)_tb.sv
-	/usr/local/bin/vvp ./sim.vvp
-	gtkwave $(DAY).vcd -r ../gtkwaverc &
+IVERILOG_FLAGS = -o $(BUILD_DIR)/sim.vvp -Wall -Winfloop -Wno-timescale -gno-shared-loop-index -g2012
 
-build: clean
-	touch synth.ys
-	echo "read -sv $(DAY).sv" > synth.ys
-	echo "hierarchy -top $(DAY)" >> synth.ys
-	echo "proc; opt; techmap; opt" >> synth.ys
-	echo "write_verilog synth.v" >> synth.ys
-	echo "show -prefix $(DAY) -colors $(TIME)" >> synth.ys
+# The simulation output executable that icarus verilog creates.
+$(BUILD_DIR)/sim.vvp: $(SRC_DIRS)/$(FILES)
+	mkdir -p $(dir $@)
+	iverilog $(IVERILOG_FLAGS) -s $(DAY)_tb $(DAY).sv $(DAY)_tb.sv
 
-synth: build
+sim: $(BUILD_DIR)/sim.vvp
+	$(BUILD_DIR)/sim.vvp
+	gtkwave $(BUILD_DIR)/$(DAY).vcd 
+
+synth: $(SRC_DIRS)/$(FILES) 
 	yosys synth.ys
 
 clean:
-	rm -rf sim.vvp synth.ys synth.v $(DAY).dot $(DAY).dot.pid $(DAY).vcd
+	rm -rf $(BUILD_DIR)
 
