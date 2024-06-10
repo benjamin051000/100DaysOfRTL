@@ -1,25 +1,28 @@
-DAY  = day00
-TIME = $$(date +'%Y%m%d-%H%M%S')
+# Apparently this basename returns "day00 " with a trailing space. Weird.
+DAY = $(strip $(shell basename $(CURDIR)))
 
-SRC_DIRS = .
-FILES = $(shell find $(SRC_DIRS) -name '*.sv' -or -name '*.v' )
+SRC_DIR = .
+SRC_FILES = $(shell find $(SRC_DIR) -name '*.sv' -or -name '*.v' )
 
 BUILD_DIR = ./build
 
-IVERILOG_FLAGS = -o $(BUILD_DIR)/sim.vvp -Wall -Winfloop -Wno-timescale -gno-shared-loop-index -g2012
+IVERILOG_OUTFILE = $(BUILD_DIR)/sim.vvp
+IVERILOG_FLAGS = -o $(IVERILOG_OUTFILE) -Wall -Winfloop -Wno-timescale -gno-shared-loop-index -g2012
 
 # The simulation output executable that icarus verilog creates.
-$(BUILD_DIR)/sim.vvp: $(SRC_DIRS)/$(FILES)
+$(IVERILOG_OUTFILE): $(SRC_DIR)/$(SRC_FILES)
 	mkdir -p $(dir $@)
 	iverilog $(IVERILOG_FLAGS) -s $(DAY)_tb $(DAY).sv $(DAY)_tb.sv
 
-sim: $(BUILD_DIR)/sim.vvp
-	$(BUILD_DIR)/sim.vvp
-	gtkwave $(BUILD_DIR)/$(DAY).vcd 
+.PHONY: clean sim synth
 
-synth: $(SRC_DIRS)/$(FILES) 
+sim: $(IVERILOG_OUTFILE)
+	$(IVERILOG_OUTFILE)
+	gtkwave $(DAY).vcd 
+
+synth: $(SRC_DIR)/$(SRC_FILES) 
 	yosys synth.ys
 
 clean:
-	rm -rf $(BUILD_DIR)
+	rm -rf $(BUILD_DIR) day00.vcd
 
