@@ -14,6 +14,11 @@ module day00 (
 ```
 
 # Goals
-- [ ] run `make` and observe no compilation errors.
-- [ ] run `make sim` and observe no simulation errors.
-- [ ] run `make synth` and observe no synthesis errors.
+- run `make` and observe no compilation errors.
+- run `make sim` and observe no simulation errors.
+- run `make synth` and observe no synthesis errors.
+
+> [!TIP]
+> Run `make solution` to see a simulation and synthesis output for the given 
+> solution, `day00_solution.sv`.
+
